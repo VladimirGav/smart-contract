@@ -13,7 +13,7 @@
  * Read Contract: transfer, transferFrom, approve, decreaseAllowance, increaseAllowance.
  */
 
-pragma solidity >=0.8.18;
+pragma solidity >=0.8.19;
 
 interface IERC20 {
     function totalSupply() external view returns (uint256);
@@ -92,7 +92,28 @@ library SafeMath {
     }
 }
 
-contract ERC20Token is IERC20 {
+contract Ownable {
+
+    address public owner;
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    modifier onlyOwner() {
+        require(owner == msg.sender, "onlyOwner");
+        _;
+    }
+
+    function transferOwnership(address newOwner) public onlyOwner {
+        if (newOwner != address(0)) {
+            owner = newOwner;
+        }
+    }
+
+}
+
+contract SimpleToken is Ownable, IERC20 {
     using SafeMath for uint256;
 
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
@@ -100,14 +121,12 @@ contract ERC20Token is IERC20 {
     mapping(address => uint256) private _balances;
     mapping(address => mapping(address => uint256)) private _allowances;
 
-    address private _owner;
     uint256 private _totalSupply;
     uint8 public _decimals;
     string public _symbol;
     string public _name;
 
     constructor() {
-        _owner = msg.sender;
         emit OwnershipTransferred(address(0), msg.sender);
 
         _name = "VladimirGav";
@@ -119,12 +138,8 @@ contract ERC20Token is IERC20 {
         emit Transfer(address(0), msg.sender, _totalSupply);
     }
 
-    function owner() public view returns (address) {
-        return _owner;
-    }
-
     function getOwner() external view returns (address) {
-        return owner();
+        return owner;
     }
 
     function decimals() external view returns (uint8) {
@@ -194,4 +209,5 @@ contract ERC20Token is IERC20 {
         _allowances[addressOwner][spender] = amount;
         emit Approval(addressOwner, spender, amount);
     }
+
 }
