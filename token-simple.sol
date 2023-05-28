@@ -9,8 +9,9 @@
 /**
  * It is example of a Simple Token from VladimirGav
  * This contract example contains the minimum number of functions required for the token to work.
- * Read Contract: _decimals, decimals, _name, name, _symbol, symbol, allowance, balanceOf, getOwner, totalSupply.
- * Read Contract: transfer, transferFrom, approve, decreaseAllowance, increaseAllowance.
+ * Read Contract: _decimals, decimals, _name, name, _symbol, symbol, allowance, balanceOf, getOwner, totalSupply, owner.
+ * Write Contract: transfer, transferFrom, approve, decreaseAllowance, increaseAllowance.
+ * Write Contract onlyOwner: renounceOwnership, transferOwnership.
  */
 
 pragma solidity >=0.8.19;
@@ -92,31 +93,59 @@ library SafeMath {
     }
 }
 
-contract Ownable {
+contract Context {
+    // Empty internal constructor, to prevent people from mistakenly deploying
+    // an instance of this contract, which should be used via inheritance.
+    constructor () { }
 
-    address public owner;
+    function _msgSender() internal view returns (address payable) {
+        return payable(msg.sender);
+    }
 
-    constructor() {
-        owner = msg.sender;
+    function _msgData() internal view returns (bytes memory) {
+        this; // silence state mutability warning without generating bytecode - see https://github.com/ethereum/solidity/issues/2691
+        return msg.data;
+    }
+}
+
+contract Ownable is Context {
+    address private _owner;
+
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+
+    constructor () {
+        address msgSender = _msgSender();
+        _owner = msgSender;
+        emit OwnershipTransferred(address(0), msgSender);
+    }
+
+    function owner() public view returns (address) {
+        return _owner;
     }
 
     modifier onlyOwner() {
-        require(owner == msg.sender, "onlyOwner");
+        require(_owner == _msgSender(), "onlyOwner");
         _;
     }
 
-    function transferOwnership(address newOwner) public onlyOwner {
-        if (newOwner != address(0)) {
-            owner = newOwner;
-        }
+    function renounceOwnership() public onlyOwner {
+        emit OwnershipTransferred(_owner, address(0));
+        _owner = address(0);
     }
 
+    function transferOwnership(address newOwner) public onlyOwner {
+        _transferOwnership(newOwner);
+    }
+
+    function _transferOwnership(address newOwner) internal {
+        require(newOwner != address(0), "Ownable: new owner is the zero address");
+        emit OwnershipTransferred(_owner, newOwner);
+        _owner = newOwner;
+    }
 }
 
 contract SimpleToken is Ownable, IERC20 {
     using SafeMath for uint256;
-
-    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
 
     mapping(address => uint256) private _balances;
     mapping(address => mapping(address => uint256)) private _allowances;
@@ -127,8 +156,6 @@ contract SimpleToken is Ownable, IERC20 {
     string public _name;
 
     constructor() {
-        emit OwnershipTransferred(address(0), msg.sender);
-
         _name = "VladimirGav";
         _symbol = "VladimirGav";
         _decimals = 18;
@@ -139,7 +166,7 @@ contract SimpleToken is Ownable, IERC20 {
     }
 
     function getOwner() external view returns (address) {
-        return owner;
+        return owner();
     }
 
     function decimals() external view returns (uint8) {
