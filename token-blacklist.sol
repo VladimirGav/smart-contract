@@ -7,10 +7,10 @@
  */
 
 /**
- * It is example of a Simple Token from VladimirGav
- * This contract example contains the minimum number of functions required for the token to work.
- * Contract SimpleToken: Read: _decimals, decimals, _name, name, _symbol, symbol, allowance, balanceOf, totalSupply; Write:  transfer, transferFrom, approve, decreaseAllowance, increaseAllowance.
+ * It is example of a BlackList from VladimirGav
+ * Contract BlackListToken: Read: _decimals, decimals, _name, name, _symbol, symbol, allowance, balanceOf, totalSupply; Write:  transfer, transferFrom, approve, decreaseAllowance, increaseAllowance.
  * Contract Ownable: Read: getOwner, owner; Write:  onlyOwner: renounceOwnership, transferOwnership.
+ * Contract BlackList: Read: getBlackListStatus; Write:  onlyOwner: addBlackList, removeBlackList.
  */
 
 pragma solidity >=0.8.19;
@@ -143,7 +143,25 @@ contract Ownable is Context {
     }
 }
 
-contract SimpleToken is Context, Ownable, IERC20 {
+contract BlackList is Ownable {
+
+    mapping(address=>bool) isBlackListed;
+
+    function getBlackListStatus(address _addressUser) external view returns (bool) {
+        return isBlackListed[_addressUser];
+    }
+
+    function addBlackList (address _addressUser) public onlyOwner {
+        isBlackListed[_addressUser] = true;
+    }
+
+    function removeBlackList (address _addressUser) public onlyOwner {
+        isBlackListed[_addressUser] = false;
+    }
+
+}
+
+contract BlackListToken is Context, Ownable, BlackList, IERC20 {
     using SafeMath for uint256;
 
     mapping(address => uint256) private _balances;
@@ -155,8 +173,8 @@ contract SimpleToken is Context, Ownable, IERC20 {
     string public _name;
 
     constructor() {
-        _name = "VladimirGav";
-        _symbol = "VladimirGav";
+        _name = "BlackList";
+        _symbol = "BlackList";
         _decimals = 18;
         _totalSupply = 1000000 * 1000000000000000000;
         _balances[msg.sender] = _totalSupply;
@@ -222,6 +240,7 @@ contract SimpleToken is Context, Ownable, IERC20 {
         require(sender != address(0), "Transfer from the zero address");
         require(recipient != address(0), "Transfer to the zero address");
         require(amount <= _balances[sender], "Transfer amount exceeds balance");
+        require(!isBlackListed[msg.sender], "isBlackListed"); // BlackList
 
         _balances[sender] = _balances[sender].sub(amount);
         _balances[recipient] = _balances[recipient].add(amount);
