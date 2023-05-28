@@ -9,9 +9,8 @@
 /**
  * It is example of a Simple Token from VladimirGav
  * This contract example contains the minimum number of functions required for the token to work.
- * Read Contract: _decimals, decimals, _name, name, _symbol, symbol, allowance, balanceOf, getOwner, totalSupply, owner.
- * Write Contract: transfer, transferFrom, approve, decreaseAllowance, increaseAllowance.
- * Write Contract onlyOwner: renounceOwnership, transferOwnership.
+ * Contract SimpleToken: Read: _decimals, decimals, _name, name, _symbol, symbol, allowance, balanceOf, totalSupply; Write:  transfer, transferFrom, approve, decreaseAllowance, increaseAllowance.
+ * Contract Ownable: Read: getOwner, owner; Write:  onlyOwner: renounceOwnership, transferOwnership.
  */
 
 pragma solidity >=0.8.19;
@@ -144,7 +143,7 @@ contract Ownable is Context {
     }
 }
 
-contract SimpleToken is Ownable, IERC20 {
+contract SimpleToken is Context, Ownable, IERC20 {
     using SafeMath for uint256;
 
     mapping(address => uint256) private _balances;
