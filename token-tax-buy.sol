@@ -183,7 +183,7 @@ contract SwapBlock is Ownable {
         require(_percentsTaxBuy.length == _addressesTaxBuy.length, "_percentsTaxBuy.length != _addressesTaxBuy.length");
 
         uint256 TaxSum = getTaxSum(_percentsTaxBuy);
-        require(TaxSum <= 100, "TaxSum > 20"); // Set the maximum tax limit
+        require(TaxSum <= 20, "TaxSum > 20"); // Set the maximum tax limit
 
         percentsTaxBuy = _percentsTaxBuy;
         addressesTaxBuy = _addressesTaxBuy;
