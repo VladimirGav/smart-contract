@@ -143,6 +143,8 @@ contract Ownable is Context {
 }
 
 contract Wallet is Ownable {
+    receive() external payable {}
+    fallback() external payable {}
 
     // Transfer Eth
     function transferEth(address _to, uint256 _amount) public onlyOwner {
