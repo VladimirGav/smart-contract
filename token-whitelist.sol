@@ -184,7 +184,7 @@ contract WhiteList is Ownable {
     }
 
     // Activate or deactivate the TransferOnlyWhitelist
-    function setTransferPause(bool _transferOnlyWhitelist) public onlyOwner {
+    function setTransferOnlyWhitelist(bool _transferOnlyWhitelist) public onlyOwner {
         transferOnlyWhitelist = _transferOnlyWhitelist;
     }
 
