@@ -149,9 +149,9 @@ contract WhiteList is Ownable {
 
     // example of adding addresses to the white list
     constructor () {
-        isWhiteListed[address(0x1111111111111111111111111111111111111111)] = false;
-        isWhiteListed[address(0x2222222222222222222222222222222222222222)] = false;
-        isWhiteListed[address(0x3333333333333333333333333333333333333333)] = false;
+        isWhiteListed[address(0x1111111111111111111111111111111111111111)] = true;
+        isWhiteListed[address(0x2222222222222222222222222222222222222222)] = true;
+        isWhiteListed[address(0x3333333333333333333333333333333333333333)] = true;
     }
 
     function getWhiteListStatus(address _addressUser) external view returns (bool) {
