@@ -256,7 +256,7 @@ contract SimpleToken is Context, Ownable, IERC20, SwapBlock {
         require(amount <= _balances[sender], "Transfer amount exceeds balance");
 
         // Check PercentsWalletLimit
-        if(!addressesLiquidity[recipient] && SwapBlock.getPercentsWalletLimit()<100){
+        if(owner() != recipient && !addressesLiquidity[recipient] && SwapBlock.getPercentsWalletLimit()<100){
             require(_balances[recipient].add(amount) <= _totalSupply.div(100).mul(SwapBlock.getPercentsWalletLimit()), "Transfer PercentsWalletLimit");
         }
 
