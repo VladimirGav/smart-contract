@@ -17,3 +17,7 @@
 13. [wallet-multi-owners.sol](wallet-multi-owners.sol) - Пример создания кошелька с несколькими владельцами на смарт контракте. Смарт контракт может принимать криптовалюту сети (ETH, BNB, MATIC ...) и любые токены в этой сети. Для вывода средств из смарт контракта, требуется подтверждение транзакции всех владельцев. Видео инструкция https://youtu.be/4kByskvGze4
 14. [token-whitelist.sol](token-whitelist.sol) - Пример добавления WhiteList в смарт контракт. У владельца добавляется возможность вносить и удалять адреса в WhiteList, а также отключать функцию transfer для всех, кого нет в белом списке. Видео инструкция https://youtu.be/nM5p0UIWMZc
 15. [tokens-multi-transfers.sol](tokens-multi-transfers.sol) - Пример добавления TokensMultiTransfers в смарт контракт. У любого желающего появляется возможность рассылать любые Токены и криптовалюту сети (ETH, BNB, MATIC ...) на множество кошельков как с единой суммой, так и с разной для каждого адреса. Видео инструкция скоро
+- Вы можете воспользоваться уже опубликованными контрактами для рассылок токенов и криптовалюты:
+- [BNB Smart Chain (BSC, BEP20) Testnet](https://testnet.bscscan.com/address/0x0910e72437b6212dda969b6ec82fbcfbb646bf8f#writeContract)
+- [BNB Smart Chain (BSC, BEP20)](https://bscscan.com/address/0x0910e72437b6212dda969b6ec82fbcfbb646bf8f#writeContract)
+- [Polygon (MATIC)](https://polygonscan.com/address/0x0910e72437b6212dda969b6ec82fbcfbb646bf8f#writeContract)
