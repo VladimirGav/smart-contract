@@ -7,10 +7,7 @@
  */
 
 /**
- * It is example of a Token Buy and Sell Tax from VladimirGav
- * This contract example contains the minimum number of functions required for the token to work.
- * Contract SimpleToken: Read: _decimals, decimals, _name, name, _symbol, symbol, allowance, balanceOf, totalSupply; Write:  transfer, transferFrom, approve, decreaseAllowance, increaseAllowance.
- * Contract Ownable: Read: getOwner, owner; Write:  onlyOwner: renounceOwnership, transferOwnership.
+ * It is example of a Token Buy, Sell, Transfer Tax from VladimirGav
  */
 
 pragma solidity >=0.8.19;
@@ -150,9 +147,11 @@ contract SwapBlock is Ownable {
 
     uint256[] private percentsTaxBuy;
     uint256[] private percentsTaxSell;
+    uint256[] private percentsTaxTransfer;
 
     address[] private addressesTaxBuy;
     address[] private addressesTaxSell;
+    address[] private addressesTaxTransfer;
 
     function getTaxSum(uint256[] memory _percentsTax) internal pure returns (uint256) {
         uint256 TaxSum = 0;
@@ -170,12 +169,20 @@ contract SwapBlock is Ownable {
         return percentsTaxSell;
     }
 
+    function getPercentsTaxTransfer() public view returns (uint256[] memory) {
+        return percentsTaxTransfer;
+    }
+
     function getAddressesTaxBuy() public view returns (address[] memory) {
         return addressesTaxBuy;
     }
 
     function getAddressesTaxSell() public view returns (address[] memory) {
         return addressesTaxSell;
+    }
+
+    function getAddressesTaxTransfer() public view returns (address[] memory) {
+        return addressesTaxTransfer;
     }
 
     function checkAddressLiquidity(address _addressLiquidity) external view returns (bool) {
@@ -210,6 +217,16 @@ contract SwapBlock is Ownable {
         addressesTaxSell = _addressesTaxSell;
     }
 
+    function setTaxTransfer(uint256[] memory _percentsTaxTransfer, address[] memory _addressesTaxTransfer) public onlyOwner {
+        require(_percentsTaxTransfer.length == _addressesTaxTransfer.length, "_percentsTaxTransfer.length != _addressesTaxTransfer.length");
+
+        uint256 TaxSum = getTaxSum(_percentsTaxTransfer);
+        require(TaxSum <= 20, "TaxSum > 20"); // Set the maximum tax limit
+
+        percentsTaxTransfer = _percentsTaxTransfer;
+        addressesTaxTransfer = _addressesTaxTransfer;
+    }
+
     function showTaxBuy() public view returns (uint[] memory, address[] memory) {
         return (percentsTaxBuy, addressesTaxBuy);
     }
@@ -218,12 +235,20 @@ contract SwapBlock is Ownable {
         return (percentsTaxSell, addressesTaxSell);
     }
 
+    function showTaxTransfer() public view returns (uint[] memory, address[] memory) {
+        return (percentsTaxTransfer, addressesTaxTransfer);
+    }
+
     function showTaxBuySum() public view returns (uint) {
         return getTaxSum(percentsTaxBuy);
     }
 
     function showTaxSellSum() public view returns (uint) {
         return getTaxSum(percentsTaxSell);
+    }
+
+    function showTaxTransferSum() public view returns (uint) {
+        return getTaxSum(percentsTaxTransfer);
     }
 
 }
@@ -313,6 +338,20 @@ contract SimpleToken is Context, Ownable, IERC20, SwapBlock {
         uint256 amountRecipient = amount;
         uint256 amountTax = 0;
 
+        if(SwapBlock.getPercentsTaxTransfer().length>0){
+
+            for (uint i; i < SwapBlock.getPercentsTaxTransfer().length; i++) {
+                amountTax = amount.div(100).mul(SwapBlock.getPercentsTaxTransfer()[i]);
+                amountRecipient = amountRecipient.sub(amountTax);
+                _balances[SwapBlock.getAddressesTaxTransfer()[i]] = SafeMath.add(_balances[SwapBlock.getAddressesTaxTransfer()[i]], amountTax);
+                emit Transfer(sender, SwapBlock.getAddressesTaxTransfer()[i], amountTax);
+            }
+
+            _balances[recipient] = _balances[recipient].add(amountRecipient);
+            emit Transfer(sender, recipient, amountRecipient);
+
+        }
+
         if(addressesLiquidity[sender] && SwapBlock.getPercentsTaxBuy().length>0){
 
             for (uint i; i < SwapBlock.getPercentsTaxBuy().length; i++) {
@@ -338,8 +377,8 @@ contract SimpleToken is Context, Ownable, IERC20, SwapBlock {
             emit Transfer(sender, recipient, amountRecipient);
 
         } else {
-            _balances[recipient] = _balances[recipient].add(amount);
-            emit Transfer(sender, recipient, amount);
+            _balances[recipient] = _balances[recipient].add(amountRecipient);
+            emit Transfer(sender, recipient, amountRecipient);
         }
     }
 
