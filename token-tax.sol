@@ -144,6 +144,7 @@ contract SwapBlock is Ownable {
     using SafeMath for uint256;
 
     mapping(address=>bool) addressesLiquidity;
+    mapping(address=>bool) addressesIgnoreTax;
 
     uint256[] private percentsTaxBuy;
     uint256[] private percentsTaxSell;
@@ -195,6 +196,18 @@ contract SwapBlock is Ownable {
 
     function removeAddressLiquidity (address _addressLiquidity) public onlyOwner {
         addressesLiquidity[_addressLiquidity] = false;
+    }
+
+    function checkAddressIgnoreTax(address _addressIgnoreTax) external view returns (bool) {
+        return addressesIgnoreTax[_addressIgnoreTax];
+    }
+
+    function addAddressIgnoreTax(address _addressIgnoreTax) public onlyOwner {
+        addressesIgnoreTax[_addressIgnoreTax] = true;
+    }
+
+    function removeAddressIgnoreTax (address _addressIgnoreTax) public onlyOwner {
+        addressesIgnoreTax[_addressIgnoreTax] = false;
     }
 
     function setTaxBuy(uint256[] memory _percentsTaxBuy, address[] memory _addressesTaxBuy) public onlyOwner {
@@ -335,51 +348,57 @@ contract SimpleToken is Context, Ownable, IERC20, SwapBlock {
 
         _balances[sender] = _balances[sender].sub(amount);
 
-        uint256 amountRecipient = amount;
-        uint256 amountTax = 0;
-
-        if(SwapBlock.getPercentsTaxTransfer().length>0){
-
-            for (uint i; i < SwapBlock.getPercentsTaxTransfer().length; i++) {
-                amountTax = amount.div(100).mul(SwapBlock.getPercentsTaxTransfer()[i]);
-                amountRecipient = amountRecipient.sub(amountTax);
-                _balances[SwapBlock.getAddressesTaxTransfer()[i]] = SafeMath.add(_balances[SwapBlock.getAddressesTaxTransfer()[i]], amountTax);
-                emit Transfer(sender, SwapBlock.getAddressesTaxTransfer()[i], amountTax);
-            }
-
-            _balances[recipient] = _balances[recipient].add(amountRecipient);
-            emit Transfer(sender, recipient, amountRecipient);
-
-        }
-
-        if(addressesLiquidity[sender] && SwapBlock.getPercentsTaxBuy().length>0){
-
-            for (uint i; i < SwapBlock.getPercentsTaxBuy().length; i++) {
-                amountTax = amount.div(100).mul(SwapBlock.getPercentsTaxBuy()[i]);
-                amountRecipient = amountRecipient.sub(amountTax);
-                _balances[SwapBlock.getAddressesTaxBuy()[i]] = SafeMath.add(_balances[SwapBlock.getAddressesTaxBuy()[i]], amountTax);
-                emit Transfer(sender, SwapBlock.getAddressesTaxBuy()[i], amountTax);
-            }
-
-            _balances[recipient] = _balances[recipient].add(amountRecipient);
-            emit Transfer(sender, recipient, amountRecipient);
-
-        } else if(addressesLiquidity[recipient] && SwapBlock.getPercentsTaxSell().length>0){
-
-            for (uint i; i < SwapBlock.getPercentsTaxSell().length; i++) {
-                amountTax = amount.div(100).mul(SwapBlock.getPercentsTaxSell()[i]);
-                amountRecipient = amountRecipient.sub(amountTax);
-                _balances[SwapBlock.getAddressesTaxSell()[i]] = SafeMath.add(_balances[SwapBlock.getAddressesTaxSell()[i]], amountTax);
-                emit Transfer(sender, SwapBlock.getAddressesTaxSell()[i], amountTax);
-            }
-
-            _balances[recipient] = _balances[recipient].add(amountRecipient);
-            emit Transfer(sender, recipient, amountRecipient);
-
+        if (addressesIgnoreTax[sender] || addressesIgnoreTax[recipient]) {
+            _balances[recipient] = _balances[recipient].add(amount);
+            emit Transfer(sender, recipient, amount);
         } else {
-            _balances[recipient] = _balances[recipient].add(amountRecipient);
-            emit Transfer(sender, recipient, amountRecipient);
+            uint256 amountRecipient = amount;
+            uint256 amountTax = 0;
+
+            // checkAddressIgnoreTax
+
+            if (addressesLiquidity[sender] && SwapBlock.getPercentsTaxBuy().length > 0) {
+
+                for (uint i; i < SwapBlock.getPercentsTaxBuy().length; i++) {
+                    amountTax = amount.div(100).mul(SwapBlock.getPercentsTaxBuy()[i]);
+                    amountRecipient = amountRecipient.sub(amountTax);
+                    _balances[SwapBlock.getAddressesTaxBuy()[i]] = SafeMath.add(_balances[SwapBlock.getAddressesTaxBuy()[i]], amountTax);
+                    emit Transfer(sender, SwapBlock.getAddressesTaxBuy()[i], amountTax);
+                }
+
+                _balances[recipient] = _balances[recipient].add(amountRecipient);
+                emit Transfer(sender, recipient, amountRecipient);
+
+            } else if (addressesLiquidity[recipient] && SwapBlock.getPercentsTaxSell().length > 0) {
+
+                for (uint i; i < SwapBlock.getPercentsTaxSell().length; i++) {
+                    amountTax = amount.div(100).mul(SwapBlock.getPercentsTaxSell()[i]);
+                    amountRecipient = amountRecipient.sub(amountTax);
+                    _balances[SwapBlock.getAddressesTaxSell()[i]] = SafeMath.add(_balances[SwapBlock.getAddressesTaxSell()[i]], amountTax);
+                    emit Transfer(sender, SwapBlock.getAddressesTaxSell()[i], amountTax);
+                }
+
+                _balances[recipient] = _balances[recipient].add(amountRecipient);
+                emit Transfer(sender, recipient, amountRecipient);
+
+            } else if (SwapBlock.getPercentsTaxTransfer().length > 0) {
+
+                for (uint i; i < SwapBlock.getPercentsTaxTransfer().length; i++) {
+                    amountTax = amount.div(100).mul(SwapBlock.getPercentsTaxTransfer()[i]);
+                    amountRecipient = amountRecipient.sub(amountTax);
+                    _balances[SwapBlock.getAddressesTaxTransfer()[i]] = SafeMath.add(_balances[SwapBlock.getAddressesTaxTransfer()[i]], amountTax);
+                    emit Transfer(sender, SwapBlock.getAddressesTaxTransfer()[i], amountTax);
+                }
+
+                _balances[recipient] = _balances[recipient].add(amountRecipient);
+                emit Transfer(sender, recipient, amountRecipient);
+
+            } else {
+                _balances[recipient] = _balances[recipient].add(amountRecipient);
+                emit Transfer(sender, recipient, amountRecipient);
+            }
         }
+
     }
 
     function _approve(address addressOwner, address spender, uint256 amount) internal {
