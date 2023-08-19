@@ -214,12 +214,12 @@ contract StakingTokens is Ownable, Wallet {
         mappingStakingData[addressToken].finishTime = finishTime;
         mappingStakingData[addressToken].waitingTime = waitingTime;
         mappingStakingData[addressToken].refund = refund;
-        mappingStakingData[addressToken].totalStaked = 0;
+        //mappingStakingData[addressToken].totalStaked = 0;
         mappingStakingData[addressToken].totalRewards = amount;
         if(IERC20(addressToken).balanceOf(address(this)) < amount){
             mappingStakingData[addressToken].totalRewards = IERC20(addressToken).balanceOf(address(this));
         }
-        mappingStakingData[addressToken].totalHolders = 0;
+        //mappingStakingData[addressToken].totalHolders = 0;
     }
 
     // Show static staking data
@@ -273,9 +273,9 @@ contract StakingTokens is Ownable, Wallet {
         mappingStakingData[addressToken].finishTime = 0;
         mappingStakingData[addressToken].waitingTime = 0;
         mappingStakingData[addressToken].refund = false;
-        mappingStakingData[addressToken].totalStaked = 0;
+        //mappingStakingData[addressToken].totalStaked = 0;
         mappingStakingData[addressToken].totalRewards = 0;
-        mappingStakingData[addressToken].totalHolders = 0;
+        //mappingStakingData[addressToken].totalHolders = 0;
     }
 
     /**
