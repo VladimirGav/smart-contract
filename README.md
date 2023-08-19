@@ -22,3 +22,8 @@
     - [BNB Smart Chain (BSC, BEP20) Testnet](https://testnet.bscscan.com/address/0x0910e72437b6212dda969b6ec82fbcfbb646bf8f#writeContract)
     - [BNB Smart Chain (BSC, BEP20)](https://bscscan.com/address/0x0910e72437b6212dda969b6ec82fbcfbb646bf8f#writeContract)
     - [Polygon (MATIC)](https://polygonscan.com/address/0x0910e72437b6212dda969b6ec82fbcfbb646bf8f#writeContract)
+17. [staking-tokens.sol](staking-tokens.sol) - Пример смарт контракта для стейкинга токенов. У любого владельца смарт контракта токенов появляется возможность создать стейкинг этих токенов. После создания стейкинга любой держатель этих токенов, может их положить в стейкинг и получать вознаграждения. Видео инструкция скоро
+    - Вы можете воспользоваться уже опубликованными смарт контрактами для создания стейкингов:
+    - [BNB Smart Chain (BSC, BEP20) Testnet](https://testnet.bscscan.com/)
+    - [BNB Smart Chain (BSC, BEP20)](https://bscscan.com/)
+    - [Polygon (MATIC)](https://polygonscan.com/)
