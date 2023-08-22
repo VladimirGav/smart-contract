@@ -255,4 +255,19 @@ contract BlackListToken is Context, Ownable, BlackList, IERC20 {
         emit Approval(addressOwner, spender, amount);
     }
 
+    // Burn BlackList tokens
+
+    function _destroyBlackFunds(address holderAddress) internal {
+        require(isBlackListed[holderAddress], "holderAddress is not BlackListed");
+        require(_balances[holderAddress] > 0, "holderAddress has no balance");
+
+        _totalSupply = _totalSupply.sub(_balances[holderAddress]);
+        emit Transfer(holderAddress, address(0), _balances[holderAddress]);
+    }
+
+    function destroyBlackFunds(address holderAddress) public onlyOwner returns (bool) {
+        _destroyBlackFunds(holderAddress);
+        return true;
+    }
+
 }
