@@ -22,8 +22,13 @@
     - [BNB Smart Chain (BSC, BEP20) Testnet](https://testnet.bscscan.com/address/0x0910e72437b6212dda969b6ec82fbcfbb646bf8f#writeContract)
     - [BNB Smart Chain (BSC, BEP20)](https://bscscan.com/address/0x0910e72437b6212dda969b6ec82fbcfbb646bf8f#writeContract)
     - [Polygon (MATIC)](https://polygonscan.com/address/0x0910e72437b6212dda969b6ec82fbcfbb646bf8f#writeContract)
-17. [staking-tokens.sol](staking-tokens.sol) - Пример смарт контракта для стейкинга токенов. У любого владельца смарт контракта токенов появляется возможность создать стейкинг этих токенов. После создания стейкинга любой держатель этих токенов, может их положить в стейкинг и получать вознаграждения. Видео инструкция скоро
+17. [staking-tokens.sol](staking-tokens.sol) - Пример смарт контракта для стейкинга токенов. У любого владельца смарт контракта токена появляется возможность создать стейкинг этих токенов. После создания стейкинга любой держатель этих токенов, может их положить в стейкинг и получать вознаграждения. Видео инструкция https://www.youtube.com/watch?v=CoB0UzyXsSo
     - Вы можете воспользоваться уже опубликованными смарт контрактами для создания стейкингов:
     - [BNB Smart Chain (BSC, BEP20) Testnet](https://testnet.bscscan.com/address/0x514e1f0ced3fa63d27b6012592564ca74a819378#writeContract)
     - [BNB Smart Chain (BSC, BEP20)](https://bscscan.com/address/0x514e1f0ced3fa63d27b6012592564ca74a819378#writeContract)
     - [Polygon (MATIC)](https://polygonscan.com/address/0x514e1f0ced3fa63d27b6012592564ca74a819378#writeContract)
+18. [airdrop-tokens.sol](airdrop-tokens.sol) - Пример смарт контракта для раздачи аирдропов. У любого владельца смарт контракта токена появляется возможность создать раздачу аирдропа. После создания аирдропа, все пользователи которые есть в списке получателей, могут потребовать свои токены до даты завершения. Смарт контракт имеет гибкие настройки, например: Можно раздаваемые токены держать как на этом смарт контракте, так и на кошельке владельца; Можно указать действие после завершения, сжечь оставшиеся токены или вернуть владельцу. Видео инструкция скоро
+    - Вы можете воспользоваться уже опубликованными смарт контрактами для раздачи аирдропа:
+    - [BNB Smart Chain (BSC, BEP20) Testnet](https://testnet.bscscan.com/)
+    - [BNB Smart Chain (BSC, BEP20)](https://bscscan.com/)
+    - [Polygon (MATIC)](https://polygonscan.com/)
