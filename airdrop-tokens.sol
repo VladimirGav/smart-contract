@@ -289,6 +289,10 @@ contract AirdropTokens is Ownable, Wallet {
                 } else {
                     IERC20(addressToken).transfer(address(0x000000000000000000000000000000000000dEaD), mappingAirdropData[addressToken].totalBalance);
                 }
+            } else {
+                if(!mappingAirdropData[addressToken].refund){
+                    IERC20(addressToken).transferFrom(getOwnerToken(addressToken), address(0x000000000000000000000000000000000000dEaD), mappingAirdropData[addressToken].totalBalance);
+                }
             }
         }
 

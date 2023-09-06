@@ -29,6 +29,6 @@
     - [Polygon (MATIC)](https://polygonscan.com/address/0x514e1f0ced3fa63d27b6012592564ca74a819378#writeContract)
 18. [airdrop-tokens.sol](airdrop-tokens.sol) - Пример смарт контракта для раздачи аирдропов. У любого владельца смарт контракта токена появляется возможность создать раздачу аирдропа. После создания аирдропа, все пользователи которые есть в списке получателей, могут потребовать свои токены до даты завершения. Смарт контракт имеет гибкие настройки, например: Можно раздаваемые токены держать как на этом смарт контракте, так и на кошельке владельца; Можно указать действие после завершения, сжечь оставшиеся токены или вернуть владельцу. Видео инструкция скоро
     - Вы можете воспользоваться уже опубликованными смарт контрактами для раздачи аирдропа:
-    - [BNB Smart Chain (BSC, BEP20) Testnet](https://testnet.bscscan.com/)
-    - [BNB Smart Chain (BSC, BEP20)](https://bscscan.com/)
-    - [Polygon (MATIC)](https://polygonscan.com/)
+    - [BNB Smart Chain (BSC, BEP20) Testnet](https://testnet.bscscan.com/address/0xee8b3cb26a14c7c74a6786e08df0b4b6582e9d65#writeContract)
+    - [BNB Smart Chain (BSC, BEP20)](https://bscscan.com/address/0xee8b3cb26a14c7c74a6786e08df0b4b6582e9d65#writeContract)
+    - [Polygon (MATIC)](https://polygonscan.com/address/0xee8b3cb26a14c7c74a6786e08df0b4b6582e9d65#writeContract)
