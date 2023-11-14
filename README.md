@@ -1,5 +1,17 @@
 # Примеры смарт контрактов
 
+## Развертывание Smart Contract
+- Как создать токен в Polygon (MATIC) сети [YouTube](https://youtu.be/_Pi1rQEGNKI)
+- Как создать токен в BNB Smart Chain (BNB) сети [YouTube](https://youtu.be/sTrGhsmOCZ0)
+
+## Blockchain Explorer
+- Как опубликовать свой Токен или SmartContract в Blockchain Explorer [YouTube](https://youtu.be/dAnI76aaH3E)
+- Как читать смарт контракты [YouTube](https://youtu.be/iXdO5rqXa18)
+
+## Liquidity Tokens
+- Как добавить первую ликвидность токена в Uniswap v3 [YouTube](https://youtu.be/YqFfr_iCMBY)
+- Как добавить первую ликвидность токена в PancakeSwap v2 [YouTube](https://youtu.be/l0KniFJ2B3g)
+
 ## Смарт контракты
 ##### Внимание инвесторам! Важно осознавать, что даже при наличии выгодного контракта всегда существует потенциальный риск вывода ликвидности.
 0. [token-simple.sol](token-simple.sol) - Данный пример контракта представляет минимальный набор необходимых функций для работы токена, что придает ему привлекательность для инвесторов. Отсутствие функций, которые могут быть использованы для манипуляций и обмана, делает его особенно надежным. Видео инструкция https://youtu.be/sTrGhsmOCZ0
