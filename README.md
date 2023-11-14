@@ -1,4 +1,4 @@
-# Примеры смарт контрактов
+# Разработка смарт контрактов и токенов
 
 ## Развертывание Smart Contract
 - Как создать токен в Polygon (MATIC) сети [YouTube](https://youtu.be/_Pi1rQEGNKI)
