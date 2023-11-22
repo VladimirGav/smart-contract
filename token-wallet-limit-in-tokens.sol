@@ -162,7 +162,7 @@ contract SwapBlock is Ownable {
 
     // Wallet Settings
     uint256 public tokensWalletLimit = 0; // If 0, then the limit is disabled
-    uint256 public minTokensWalletLimit = 1; // Set a minimum limit for token ownership
+    uint256 public minTokensWalletLimit = 1  * 1000000000000000000; // Set a minimum limit for token ownership
 
     function getTokensWalletLimit() public view returns (uint256) {
         return tokensWalletLimit;
