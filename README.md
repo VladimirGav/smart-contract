@@ -3,6 +3,8 @@
 ## Развертывание Smart Contract
 - Как создать токен в Polygon (MATIC) сети [YouTube](https://youtu.be/_Pi1rQEGNKI)
 - Как создать токен в BNB Smart Chain (BNB) сети [YouTube](https://youtu.be/sTrGhsmOCZ0)
+- Как создать токен в Avalanche C-Chain (AVAX) сети [YouTube](https://youtu.be/O6E7_yK5MWU)
+- Как создать токен в Fantom (FTM) сети [YouTube](https://youtu.be/XmR-0mEchEk)
 
 ## Blockchain Explorer
 - Как опубликовать свой Токен или SmartContract в Blockchain Explorer [YouTube](https://youtu.be/dAnI76aaH3E)
@@ -10,7 +12,13 @@
 
 ## Liquidity Tokens
 - Как добавить первую ликвидность токена в Uniswap v3 [YouTube](https://youtu.be/YqFfr_iCMBY)
+- Как добавить первую ликвидность токена в SushiSwap v3 [YouTube](https://youtu.be/DSr3F65i2bE)
 - Как добавить первую ликвидность токена в PancakeSwap v2 [YouTube](https://youtu.be/l0KniFJ2B3g)
+
+## Dex инструменты
+- Мое Dex приложение на GitHub  [VladimirGav dApp Tools](https://vladimirgav.github.io/)
+- Dex инструменты для анализа и поиска токенов в DexView [YouTube](https://youtu.be/pNisAFWql0U)
+- Графики, торги, поиск и анализ токенов в DexTools [YouTube](https://youtu.be/IAxDI-gqTgs)
 
 ## Смарт контракты
 ##### Внимание инвесторам! Важно осознавать, что даже при наличии выгодного контракта всегда существует потенциальный риск вывода ликвидности.
@@ -46,3 +54,7 @@
     - [BNB Smart Chain (BSC, BEP20) Testnet](https://testnet.bscscan.com/address/0xee8b3cb26a14c7c74a6786e08df0b4b6582e9d65#writeContract)
     - [BNB Smart Chain (BSC, BEP20)](https://bscscan.com/address/0xee8b3cb26a14c7c74a6786e08df0b4b6582e9d65#writeContract)
     - [Polygon (MATIC)](https://polygonscan.com/address/0xee8b3cb26a14c7c74a6786e08df0b4b6582e9d65#writeContract)
+    
+# Контакты
+- [Telegram](https://t.me/Vladimir_Gav)
+- [YouTube](https://www.youtube.com/@vladimirgav)
