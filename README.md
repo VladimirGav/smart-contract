@@ -7,7 +7,11 @@
 - Как создать токен в Fantom (FTM) сети [YouTube](https://youtu.be/XmR-0mEchEk)
 
 ## Blockchain Explorer
-- Как опубликовать свой Токен или SmartContract в Blockchain Explorer [YouTube](https://youtu.be/dAnI76aaH3E)
+- Как опубликовать исходный код используя Standard Json-Input. Скоро
+- Как опубликовать исходный код из 1 файла [YouTube](https://youtu.be/dAnI76aaH3E)
+- Как опубликовать исходный код из нескольких файлов [YouTube](https://youtu.be/e8pyvo4ssQU)
+- Как опубликовать исходный код используя плагин в Remix [YouTube](https://youtu.be/70mc5wb7hGc)
+- Как опубликовать исходный код автоматически [YouTube](https://youtu.be/H0ICkU1BDIY)
 - Как читать смарт контракты [YouTube](https://youtu.be/iXdO5rqXa18)
 
 ## Liquidity Tokens
