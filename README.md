@@ -5,6 +5,7 @@
 - Как создать токен в BNB Smart Chain (BNB) сети [YouTube](https://youtu.be/sTrGhsmOCZ0)
 - Как создать токен в Avalanche C-Chain (AVAX) сети [YouTube](https://youtu.be/O6E7_yK5MWU)
 - Как создать токен в Fantom (FTM) сети [YouTube](https://youtu.be/XmR-0mEchEk)
+- Как создать токен в BLAST (BLAST) сети [YouTube](https://youtu.be/QaKlbUEVHpg)
 
 ## Blockchain Explorer
 - Как опубликовать исходный код используя Standard Json-Input. Скоро
