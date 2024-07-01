@@ -8,7 +8,7 @@
 - Как создать токен в BLAST (BLAST) сети [YouTube](https://youtu.be/QaKlbUEVHpg)
 
 ## Blockchain Explorer
-- Как опубликовать исходный код используя Standard Json-Input. Скоро
+- Как опубликовать исходный код используя Standard Json-Input [YouTube](https://www.youtube.com/watch?v=rDLZbVLHdAI)
 - Как опубликовать исходный код из 1 файла [YouTube](https://youtu.be/dAnI76aaH3E)
 - Как опубликовать исходный код из нескольких файлов [YouTube](https://youtu.be/e8pyvo4ssQU)
 - Как опубликовать исходный код используя плагин в Remix [YouTube](https://youtu.be/70mc5wb7hGc)
